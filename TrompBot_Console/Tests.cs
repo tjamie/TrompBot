@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using Tweetinvi;
+using Newtonsoft;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace TrompBot_Console
 {
-    class Tests
+    static class Tests
     {
         public static void ListTest()
         {
@@ -36,6 +40,20 @@ namespace TrompBot_Console
             {
                 Console.Write(item + " ");
             }
+        }
+
+        public static void GetCreds()
+        {
+            var credFile = "[Redacted]";
+            JObject obj = JObject.Parse(System.IO.File.ReadAllText(credFile));
+
+            using (StreamReader file = File.OpenText(credFile))
+            using (JsonTextReader reader = new JsonTextReader(file))
+            {
+                JObject o2 = (JObject)JToken.ReadFrom(reader);
+            }
+
+            Console.WriteLine("{0}", (string)obj["project_id"]);
         }
 
         public static void TweetMessage(string[] argv)

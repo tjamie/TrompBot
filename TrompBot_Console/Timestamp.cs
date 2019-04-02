@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TrompBot_Console
 {
-    class Timestamp
+    static class Timestamp
     {
         public static string GetTime()
         {

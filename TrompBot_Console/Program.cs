@@ -5,7 +5,7 @@ using System.Linq;
 using Tweetinvi;
 using Tweetinvi.Exceptions;
 
-namespace TrompBotCS
+namespace TrompBot_Console
 {
     class Program
     {
@@ -27,19 +27,21 @@ namespace TrompBotCS
 
             #region Authentication Information
             //authentication
-            //TODO: redact credentials if source code ever gets released, move credentials to another class (including google cloud/whatever if that ever gets implemented)
-            string consumerKey = TrompBot_Console.TrompCredentials.consumerKey;
-            string consumerSecret = TrompBot_Console.TrompCredentials.consumerSecret;
-            string accessToken = TrompBot_Console.TrompCredentials.accessToken;
-            string accessTokenSecret = TrompBot_Console.TrompCredentials.accessTokenSecret;
-
-            //Auth.SetUserCredentials("0Y5IMAKuflHM5bo9kS3K1zoIl", "1vA6zuEvAGhGMuZJMU4Sjf01zfXaqkTi4JrLBTjt1bmbsax1fK", "918502759573450752-e0G93Zanadk7eNXmLlZaFCH9IaDt3sr", "IrV4FWupjuwjAu272kNVTfmnKIgj1Ona2wvS6gA7CqPbn");
-            //CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET
+            //string consumerKey = TrompBot_Console.TrompCredentials.consumerKey;
+            //string consumerSecret = TrompBot_Console.TrompCredentials.consumerSecret;
+            //string accessToken = TrompBot_Console.TrompCredentials.accessToken;
+            //string accessTokenSecret = TrompBot_Console.TrompCredentials.accessTokenSecret;
+            TrompCredentials.Credentials creds = TrompCredentials.GetCredentials();
+            string consumerKey = creds.consumerKey;
+            string consumerSecret = creds.consumerSecret;
+            string accessToken = creds.accessToken;
+            string accessTokenSecret = creds.accessTokenSecret;
+            
             Auth.SetUserCredentials(consumerKey, consumerSecret, accessToken, accessTokenSecret);
             
             #endregion
 
-            var authenticateUser = User.GetAuthenticatedUser();
+            //var authenticateUser = User.GetAuthenticatedUser();
 
             bool exit = false;
 
@@ -52,7 +54,8 @@ namespace TrompBotCS
 
                 Console.WriteLine("Welcome to TrompBot version {0}. Current environment: {1}", version, Environment.OSVersion);
                 Console.WriteLine("Authenticating user...");
-                Console.WriteLine("User authenticated: {0}", authenticateUser);
+                //Console.WriteLine("User authenticated: {0}", authenticateUser);
+                var authenticateUser = User.GetAuthenticatedUser();
                 Console.Write(Environment.NewLine);
 
                 Console.WriteLine("Consumer Key: {0}", consumerKey);
@@ -96,6 +99,11 @@ namespace TrompBotCS
                         case "dir":
                             CSV.Start(argv);
                             break;
+                        case "jsontest":
+                            {
+                                TrompBot_Console.Tests.GetCreds();
+                                break;
+                            }
                         case "modtest":
                             Console.WriteLine(TrompBot_Console.Modify.ModifyTweet(argv));
                             break;
@@ -139,22 +147,4 @@ namespace TrompBotCS
 
         }
     }
-    
-    class Notes
-    {
-        /*
-         
-        Publish tweet:
-            Tweet.PublishTweet("Message");
-
-        .csv format:
-            Date,Time,Tweet
-            d MMM yyyy,HH:mm:ss,"Tweet text"
-
-        Failed tweets:
-            My visit to Japan and friendship with PM Abe will yield many benefits, for our great Country. Massive military & energy orders happening+++!
-
-
-        */
-                    }
-                }
+}

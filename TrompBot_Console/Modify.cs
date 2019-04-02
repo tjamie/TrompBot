@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrompBot_Console
 {
-    class Modify
+    static class Modify
     {
         public static string ModifyTweet(string[] tweet)
         {

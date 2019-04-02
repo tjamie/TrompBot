@@ -42,3 +42,7 @@ Version 0.19
 Version 0.20
 	Housekeeping -- Many classes moved out of Program.cs.
 	Try{} Catch{} added to Modify.ModifyTweet under if (!exclusionFound).
+
+Version 0.21
+	Removal of hardcoded credentials
+	Some small tweaks

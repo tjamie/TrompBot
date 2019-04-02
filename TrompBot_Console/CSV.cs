@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TrompBotCS
+namespace TrompBot_Console
 {
     public class CSV
     {

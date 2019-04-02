@@ -36,7 +36,7 @@ namespace TrompBot_Console
                 string tweetString;
                 string[] tweetArray;
                 string newTweet;
-                tweetString = Convert.ToString(args.Tweet); //hory shit, this actually works
+                tweetString = Convert.ToString(args.Tweet);
 
                 if (!TrompBot_Console.Detections.IsRetweet(tweetString) && !TrompBot_Console.Detections.IsDuplicate(tweetString, lastTweet))
                 {
@@ -102,8 +102,6 @@ namespace TrompBot_Console
                             //TODO: finish Modify.SplitTweet to publish multiple tweets
                             Console.WriteLine("[{0}] Character count exceeds {1}. Will not publish.\n   Tweet: {2}", Timestamp.GetTime(), maxCharacterCount, newTweet);
                         }
-
-
                     }
                 }
                 else
@@ -113,11 +111,9 @@ namespace TrompBot_Console
                         Console.WriteLine("[{0}] Retweet (or duplicate) detected -- will not publish.\n     \"{1}\"", Timestamp.GetTime(), tweetString);
                     }
                 }
-
-
             };
 
-            //from stackoverflow:
+            // In case of disconnects:
             stream.StreamStopped += (sender, args) =>
             {
                 stream.StartStreamMatchingAllConditions();
@@ -125,10 +121,6 @@ namespace TrompBot_Console
 
             stream.StartStreamMatchingAllConditions();
         }
-
-        //First lambda ever. Also completely unnecessary.
         static string[] TweetToArray(string tweet) => tweet.Split(' ');
-
-
     }
 }
