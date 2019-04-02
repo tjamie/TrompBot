@@ -1,0 +1,44 @@
+﻿Version 0.8
+	Added second hashtag (#) check for redundancy
+
+Version 0.9
+	"is", "u.s.", "&amp" added to exclusion dictionary
+
+Version 0.10
+	Added @reeldonoldtrump to be ignored by twitter stream
+
+Version 0.11
+	Added "as" and "i," to exclusion dictionary.
+
+Version 0.12
+	Removed Korea from exclusion list because Koree and Koreo are so much better.
+	Moved redundant hashtag check to check character array instead of a word's string. If this doesn't work, try adding a 5 ms sleep.
+	Added check for "http" -- may or may not need to be moved to character array area.
+
+Version 0.13
+	Dirty bug fix: Added measure in DonnieWatch.Dotard() to prevent posting Donnie's retweets
+
+Version 0.14
+	Retweet detection changed.
+
+Version 0.15
+	Most recent tweet from Trump now stored to prevent spam.
+
+Version 0.16
+	Several additions to the replacement dictionary.
+	Some federal agencies added to exclusion list.
+
+Version 0.17
+	Added "&amp;" => "&" in replacement dictionary.
+	Added character counter; will not attempt to publish tweet exceeing 140 characters
+
+Version 0.18
+	Changed maximum character count to 280, apparently.
+	Added some entries to exclusion list and replacement dictionary.
+
+Version 0.19
+	Added exception handler to tweet publisher.
+
+Version 0.20
+	Housekeeping -- Many classes moved out of Program.cs.
+	Try{} Catch{} added to Modify.ModifyTweet under if (!exclusionFound).
