@@ -12,10 +12,8 @@ namespace TrompBot_Console
     {
         public static void Dotard()
         {
-            //Twitter user IDs, testing and running
-            //string ID = "25073877";
+            //Twitter user IDs
             //Tromp ID: 918502759573450752
-            //long targetID = 918502759573450752;
             //Trump ID: 25073877
             int targetID = 25073877;
             string lastTweet = "";
@@ -36,20 +34,20 @@ namespace TrompBot_Console
                 string tweetString;
                 string[] tweetArray;
                 string newTweet;
+                bool modTweet;
                 tweetString = Convert.ToString(args.Tweet);
 
-                if (!TrompBot_Console.Detections.IsRetweet(tweetString) && !TrompBot_Console.Detections.IsDuplicate(tweetString, lastTweet))
+                if (!Detections.IsRetweet(tweetString) && !Detections.IsDuplicate(tweetString, lastTweet))
                 {
-                    //Console.WriteLine("String: {0}", tweetString);
-                    bool modTweet = true;
                     tweetArray = TweetToArray(tweetString);
-                    foreach (string word in tweetArray)
+
+                    if (tweetString.ToLower().Contains("@realdonaldtrump") || tweetString.ToLower().Contains("@reeldonoldtromp"))
                     {
-                        //if (word.ToLower() == "@realdonaldtrump" || word.ToLower() == "@realdonaldtrump." || word.ToLower() == "@realdonaldtrump?" || word.ToLower() == "@realdonaldtrump," || word.ToLower() == "@realdonaldtrump!")
-                        if (word.ToLower().Contains("@realdonaldtrump") || word.ToLower().Contains("@reeldonoldtromp"))
-                        {
-                            modTweet = false;
-                        }
+                        modTweet = false;
+                    }
+                    else
+                    {
+                        modTweet = true;
                     }
 
                     if (modTweet == true)
@@ -58,16 +56,8 @@ namespace TrompBot_Console
                         Console.WriteLine("[{0}] Tweet detected: \"{1}\"", Timestamp.GetTime(), tweetString);
                         System.Threading.Thread.Sleep(5000);
 
-                        #region debug: array dump
-                        //Console.WriteLine("Array:");
-                        //for (int i = 0; i < tweetArray.Length; i++)
-                        //{
-                        //    Console.Write("({0}){1} ", i, tweetArray[i]);
-                        //}
-                        //Console.Write(Environment.NewLine);
-                        #endregion
+                        newTweet = Modify.ModifyTweet(tweetArray);
 
-                        newTweet = TrompBot_Console.Modify.ModifyTweet(tweetArray);
                         tweetLength = newTweet.Length;
 
                         Console.WriteLine("[{0}] Character count: {1}", Timestamp.GetTime(), tweetLength);
@@ -99,7 +89,6 @@ namespace TrompBot_Console
                         }
                         else
                         {
-                            //TODO: finish Modify.SplitTweet to publish multiple tweets
                             Console.WriteLine("[{0}] Character count exceeds {1}. Will not publish.\n   Tweet: {2}", Timestamp.GetTime(), maxCharacterCount, newTweet);
                         }
                     }

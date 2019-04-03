@@ -23,7 +23,7 @@ namespace TrompBot_Console
         
         static void Main(string[] args)
         {
-            const string version = "0.21";
+            const string version = "0.22";
 
             #region Authentication Information
             //authentication

@@ -46,3 +46,6 @@ Version 0.20
 Version 0.21
 	Removal of hardcoded credentials
 	Some small tweaks
+
+Version 0.22
+	Refactoring
