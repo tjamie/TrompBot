@@ -9,21 +9,9 @@ namespace TrompBot_Console
 {
     class Program
     {
-        /** TODO:
-         * ============== BEFORE PUBLISHING ==============
-         * 
-         * Add a delay between tweets, or a maximum number of tweets published within a five or ten minute period... Let's not get banned again
-         *  (BandAid applied -- Will no longer publish tweets with "RT" detected)
-         *
-         * Also need to do a large amount of garbage collection once we're running again... parts of this have gotten fugly
-         * 
-         **/
-
-        //TODO: separate classes into different .cs files... I didn't expect this to get as big as it is
-        
         static void Main(string[] args)
         {
-            const string version = "0.22";
+            const string version = "0.23.1";
 
             #region Authentication Information
             //authentication
@@ -36,6 +24,8 @@ namespace TrompBot_Console
             string consumerSecret = creds.consumerSecret;
             string accessToken = creds.accessToken;
             string accessTokenSecret = creds.accessTokenSecret;
+
+            Console.WriteLine("Credentials received:\n Consumer Key: {0}\n Consumer Secret: {1}\n Access Token: {2}\n Access Token Secret: {3}", consumerKey, consumerSecret, accessToken, accessTokenSecret);
             
             Auth.SetUserCredentials(consumerKey, consumerSecret, accessToken, accessTokenSecret);
             
@@ -46,7 +36,7 @@ namespace TrompBot_Console
             bool exit = false;
 
             //set directory to default
-            CSV.DefaultStart();
+            //CSV.DefaultStart();
 
             while (!exit)
             {
@@ -58,14 +48,14 @@ namespace TrompBot_Console
                 var authenticateUser = User.GetAuthenticatedUser();
                 Console.Write(Environment.NewLine);
 
-                Console.WriteLine("Consumer Key: {0}", consumerKey);
-                Console.WriteLine("Consumer Secret: {0}", consumerSecret);
-                Console.WriteLine("Access Token: {0}", accessToken);
-                Console.WriteLine("Access Token Secret: {0}", accessTokenSecret);
-                Console.Write(Environment.NewLine);
+                //Console.WriteLine("Consumer Key: {0}", consumerKey);
+                //Console.WriteLine("Consumer Secret: {0}", consumerSecret);
+                //Console.WriteLine("Access Token: {0}", accessToken);
+                //Console.WriteLine("Access Token Secret: {0}", accessTokenSecret);
+                //Console.Write(Environment.NewLine);
 
-                Console.WriteLine("Current directory: {0}", CSV.directory);
-                Console.Write(Environment.NewLine);
+                //Console.WriteLine("Current directory: {0}", CSV.directory);
+                //Console.Write(Environment.NewLine);
 
                 while (!proceed)
                 {

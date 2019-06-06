@@ -24,6 +24,7 @@ namespace TrompBot_Console
             //Console.ReadLine();
             //var credJson = System.IO.Path.Combine(CSV.directory, "TrompCredentials.json");
             var credJson = System.IO.Path.Combine(path, "TrompCredentials.json");
+            Console.WriteLine("Reading credentials file: {0}", credJson);
             JObject jObj = JObject.Parse(System.IO.File.ReadAllText(credJson));
 
             Credentials trompCreds = new Credentials();
@@ -31,6 +32,7 @@ namespace TrompBot_Console
             trompCreds.consumerSecret = (string)jObj["consumerSecret"];
             trompCreds.accessToken = (string)jObj["accessToken"];
             trompCreds.accessTokenSecret = (string)jObj["accessTokenSecret"];
+            
 
             return trompCreds;
         }

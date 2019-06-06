@@ -49,3 +49,6 @@ Version 0.21
 
 Version 0.22
 	Refactoring
+
+Version 0.23
+	Tweetinvi updated to 4.0.1, fixed Twitter API changes
