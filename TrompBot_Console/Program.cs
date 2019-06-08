@@ -7,11 +7,12 @@ using Tweetinvi.Exceptions;
 
 namespace TrompBot_Console
 {
+    // TODO: de-static everything
     class Program
     {
         static void Main(string[] args)
         {
-            const string version = "0.23.1";
+            const string version = "0.24";
 
             #region Authentication Information
             //authentication

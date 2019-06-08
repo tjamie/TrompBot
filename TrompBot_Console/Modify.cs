@@ -314,6 +314,8 @@ namespace TrompBot_Console
             //examine each letter in current word, replace if applicable
             char[] chars = word.ToCharArray();
 
+            int[] binaryArr = Number.RandomBinary();
+
             try
             {
                 for (int iLetter = 0; iLetter < chars.Length; iLetter++)
@@ -321,11 +323,13 @@ namespace TrompBot_Console
                     if (lowerVowels.Contains(chars[iLetter]))
                     {
                         //replace vowel with a random of 'e' or 'o'
-                        chars[iLetter] = lowerReps[Number.RNG(0, lowerReps.Length - 1)];
+                        chars[iLetter] = lowerReps[binaryArr[iLetter % binaryArr.Length]];
+                        //chars[iLetter] = lowerReps[Number.RNG(0, lowerReps.Length - 1)];
                     }
                     else if (upperVowels.Contains(chars[iLetter]))
                     {
-                        chars[iLetter] = upperReps[Number.RNG(0, upperReps.Length - 1)];
+                        chars[iLetter] = upperReps[binaryArr[iLetter % binaryArr.Length]];
+                        //chars[iLetter] = upperReps[Number.RNG(0, upperReps.Length - 1)];
                     }
                 }
                 return string.Join("", chars);
