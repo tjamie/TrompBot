@@ -222,9 +222,11 @@ namespace TrompBot_Console
                 // word = replacementDict[sansPunctuation];
                 string wordLower = word.ToLower();
                 string newWord = wordLower.Replace(sansPunctuation.ToLower(), replacementDict[sansPunctuation.ToLower()]);
-                // TODO: preserve letter case
+                // TODO: preserve letter case (can probably use a bool array if a better solution doesn't present itself)
+                // => 1 for capitals, 0 for lowercase or non-alphabetic characters
 
                 return newWord;
+
                 #region idk
                 // TODO: return to this and implement capitalization preservation... this was just hacked together to put it in a somewhat
                 // workable state to fix code elsewhere
@@ -311,6 +313,8 @@ namespace TrompBot_Console
 
         static string ReplaceVowels(string word)
         {
+            bool nestedExceptionThrown = false;
+
             //examine each letter in current word, replace if applicable
             char[] chars = word.ToCharArray();
 
@@ -323,15 +327,34 @@ namespace TrompBot_Console
                     if (lowerVowels.Contains(chars[iLetter]))
                     {
                         //replace vowel with a random of 'e' or 'o'
-                        chars[iLetter] = lowerReps[binaryArr[iLetter % binaryArr.Length]];
-                        //chars[iLetter] = lowerReps[Number.RNG(0, lowerReps.Length - 1)];
+                        try
+                        {
+                            chars[iLetter] = lowerReps[binaryArr[iLetter % binaryArr.Length]];
+                        }
+                        catch(Exception ex)
+                        {
+                            nestedExceptionThrown = true;
+                            chars[iLetter] = lowerReps[Number.RNG(0, lowerReps.Length - 1)];
+                        }
                     }
                     else if (upperVowels.Contains(chars[iLetter]))
                     {
-                        chars[iLetter] = upperReps[binaryArr[iLetter % binaryArr.Length]];
-                        //chars[iLetter] = upperReps[Number.RNG(0, upperReps.Length - 1)];
+                        try
+                        {
+                            chars[iLetter] = upperReps[binaryArr[iLetter % binaryArr.Length]];
+                        }
+                        catch(Exception ex)
+                        {
+                            nestedExceptionThrown = true;
+                            chars[iLetter] = upperReps[Number.RNG(0, upperReps.Length - 1)];
+                        }
                     }
                 }
+                if (nestedExceptionThrown)
+                {
+                    Console.WriteLine("Exception thrown during modification of {0}.", word);
+                }
+
                 return string.Join("", chars);
             }
             catch (System.IndexOutOfRangeException ex)
