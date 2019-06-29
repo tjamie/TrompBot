@@ -57,3 +57,5 @@ Version 0.24
 	New RNG method implemented for use in Modify.ReplaceVowels()
 	0.24.1
 		try{}catch{} added to above
+	0.24.2
+		minor changes to exclusion and replacement dictionaries

@@ -43,9 +43,11 @@ namespace TrompBot_Console
                 "america,",
                 "america!",
                 "u.s.",
+                "us",
                 "american",
                 "americans",
                 "china",
+                "china,",
                 "japan",
                 "germany",
                 "syria",
@@ -64,6 +66,7 @@ namespace TrompBot_Console
                 "ill",
                 "in",
                 "and", //might want to replace with something like "nd" or "+" instead
+                "back",
                 //symbols
                 "&",
                 //"&amp",
@@ -84,7 +87,7 @@ namespace TrompBot_Console
         //[string to replace, replacement string]
         static Dictionary<string, string> replacementDict = new Dictionary<string, string>
         {
-            //SMSification and general ignorance of English
+            // SMSification and general ignorance of English
             {"your", "ur" },
             {"you're", "ur" },
             {"you", "u" },
@@ -104,16 +107,29 @@ namespace TrompBot_Console
             {"pure", "pyur" },
             {"origin", "orange" },
             {"origins", "oranges" },
-            //antonyms
+            {"straight", "gay" },
+            {"strait", "gay" },
+            {"elite", "1337" },
+            // Antonyms
             {"humble", "rude" },
             {"great", "bad" },
-            //formatting corrections
+            {"best", "wrst" },
+            // Formatting corrections
             {"&amp;", "&" },
-            //etc
+            // etc
             {"jobs", "jerb" },
             {"coverage", "covfefe" },
-            {"one", "uno" }
+            {"one", "uno" },
+            // Make Russia Great Again
+            {"diplomat", "компрома́т" },
+            {"collusion", "honesty" },
+            {"democrat", "gay" },
+            {"republican", "beefcake" },
+            {"vladimir", "precious" },
+            {"putin", "waifu" },
+            {"democracy", "oligarchy" }
         };
+        // old version below
         static string[,] replacementDictionary =
         {
                 //SMSification and general ignorance of English
