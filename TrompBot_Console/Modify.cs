@@ -8,6 +8,8 @@ namespace TrompBot_Console
 {
     static class Modify
     {
+        // Oh my god... if anyone is reading through this, I'm sorry. I didn't know what I was doing when I first started writing this.
+
         static char[] lowerVowels = { 'a', 'i', 'u' };
         static char[] upperVowels = { 'A', 'I', 'U' };
 
@@ -330,11 +332,13 @@ namespace TrompBot_Console
         static string ReplaceVowels(string word)
         {
             bool nestedExceptionThrown = false;
+            Exception nestedEx = null;
 
             //examine each letter in current word, replace if applicable
             char[] chars = word.ToCharArray();
 
-            int[] binaryArr = Number.RandomBinary();
+            //int[] binaryArr = Number.RandomBinary();
+            bool[] bitArr = Number.RandomBitArray(3);
 
             try
             {
@@ -345,30 +349,48 @@ namespace TrompBot_Console
                         //replace vowel with a random of 'e' or 'o'
                         try
                         {
-                            chars[iLetter] = lowerReps[binaryArr[iLetter % binaryArr.Length]];
+                            //chars[iLetter] = lowerReps[binaryArr[iLetter % binaryArr.Length]];
+                            if (bitArr[iLetter % bitArr.Length])
+                            {
+                                chars[iLetter] = lowerReps[1];
+                            }
+                            else
+                            {
+                                chars[iLetter] = lowerReps[0];
+                            }
                         }
                         catch(Exception ex)
                         {
                             nestedExceptionThrown = true;
                             chars[iLetter] = lowerReps[Number.RNG(0, lowerReps.Length - 1)];
+                            nestedEx = ex;
                         }
                     }
                     else if (upperVowels.Contains(chars[iLetter]))
                     {
                         try
                         {
-                            chars[iLetter] = upperReps[binaryArr[iLetter % binaryArr.Length]];
+                            //chars[iLetter] = upperReps[binaryArr[iLetter % binaryArr.Length]];
+                            if (bitArr[iLetter % bitArr.Length])
+                            {
+                                chars[iLetter] = upperReps[1];
+                            }
+                            else
+                            {
+                                chars[iLetter] = upperReps[0];
+                            }
                         }
                         catch(Exception ex)
                         {
                             nestedExceptionThrown = true;
                             chars[iLetter] = upperReps[Number.RNG(0, upperReps.Length - 1)];
+                            nestedEx = ex;
                         }
                     }
                 }
                 if (nestedExceptionThrown)
                 {
-                    Console.WriteLine("Exception thrown during modification of {0}.", word);
+                    Console.WriteLine("Exception thrown during modification of {0}: {1} [bit array: {2}]", word, nestedEx.ToString(), bitArr.ToString());
                 }
 
                 return string.Join("", chars);
